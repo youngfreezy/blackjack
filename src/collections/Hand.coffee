@@ -4,15 +4,24 @@ class window.Hand extends Backbone.Collection
   initialize: (array, @deck, @isDealer) ->
 
   hit: ->
+    #takes a card off the deck and adds it to the current hand
     @add(@deck.pop())
+    #  @last returns the last card in the hand
     @last()
 
+  #stand method goes here - currently being called from appView.coffee click event
+  stand: ->
+
+    for score in @scores()
+      if score > 21 
+        alert("You Lost!")
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
   , 0
 
   minScore: -> @reduce (score, card) ->
+    #adds the score of all cards in the hand, excluding the card this isn't 'revealed'
     score + if card.get 'revealed' then card.get 'value' else 0
   , 0
 
