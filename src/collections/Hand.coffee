@@ -8,14 +8,11 @@ class window.Hand extends Backbone.Collection
     @add(@deck.pop())
     #  @last returns the last card in the hand
     @last()
-
+    @trigger('hit', @)
   #stand method goes here - currently being called from appView.coffee click event
   stand: ->
-    for score in @scores()
-      if score > 21 
-        #bad voodoo - shouldnt be controlling out of the model
-        alert("You Lost!")
-    
+  
+    @models[0].flip(); 
 
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
