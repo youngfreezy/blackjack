@@ -29,4 +29,5 @@ class window.Hand extends Backbone.Collection
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     [@minScore(), @minScore() + 10 * @hasAce()]
 
-
+    
+  maxScore: -> if @scores()[1] <= 21 then @scores()[1] else @scores()[0]

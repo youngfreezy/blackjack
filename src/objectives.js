@@ -6,10 +6,7 @@
       //we'll assume that both ace cases must be equal to or over 17
   //if player is over 21 he loses
   //if dealer 21 he loses
-  //else the person with the higher score wins
-  //if they both have the same score tie
-  
-//create logic for hit - if over 21 dealer wins
+
 
 
 
