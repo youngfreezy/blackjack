@@ -1,16 +1,31 @@
 .card {
-  float: left;
-  border: solid 1px black;
-  width: 100px;
-  border-radius: 5px;
-  height: 140px;
-  margin-right: 20px;
+    float: left;
+    border: solid 1px black;
+    width: 100px;
+    border-radius: 5px;
+    height: 140px;
+    margin-right: 20px;
 }
 
 .covered {
-  background-color: black;
+    background-color: black;
 }
 
 .hand {
-  overflow: auto;
+    overflow: auto;
 }
+
+.dealer-hand-container {
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-hand-container {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

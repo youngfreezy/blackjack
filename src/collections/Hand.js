@@ -18,12 +18,28 @@ window.Hand = (function(superClass) {
 
   Hand.prototype.hit = function() {
     this.add(this.deck.pop());
-    this.last();
-    return this.trigger('hit', this);
+    if (this.busted()) {
+      this.trigger('bust');
+    }
+    return this.last();
   };
 
   Hand.prototype.stand = function() {
-    return this.models[0].flip();
+    return this.trigger('stand');
+  };
+
+  Hand.prototype.playToWin = function() {
+    this.first().flip();
+    while (this.scores()[0] < 17) {
+      this.hit();
+    }
+    if (!this.busted()) {
+      return this.stand();
+    }
+  };
+
+  Hand.prototype.busted = function() {
+    return this.maxScore() > 21;
   };
 
   Hand.prototype.hasAce = function() {

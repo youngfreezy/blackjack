@@ -4,16 +4,21 @@ class window.Hand extends Backbone.Collection
   initialize: (array, @deck, @isDealer) ->
 
   hit: ->
-    #takes a card off the deck and adds it to the current hand
     @add(@deck.pop())
-    #  @last returns the last card in the hand
-    @last()
-    @trigger('hit', @)
-  #stand method goes here - currently being called from appView.coffee click event
-  stand: ->
-  
-    @models[0].flip(); 
 
+    @trigger 'bust' if @busted()
+    @last()
+
+
+  stand: -> @trigger 'stand'
+
+  playToWin: ->
+    @first().flip()
+    @hit() while @scores()[0] < 17
+    @stand() if !@busted()
+
+  busted: -> @maxScore() > 21
+  
   hasAce: -> @reduce (memo, card) ->
     memo or card.get('value') is 1
   , 0
@@ -29,5 +34,5 @@ class window.Hand extends Backbone.Collection
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     [@minScore(), @minScore() + 10 * @hasAce()]
 
-    
+
   maxScore: -> if @scores()[1] <= 21 then @scores()[1] else @scores()[0]

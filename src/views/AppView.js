@@ -17,13 +17,19 @@ window.AppView = (function(superClass) {
     },
     'click .stand-button': function() {
       return this.model.get('playerHand').stand();
-    },
-    'click .stand-button': function() {
-      return this.model.get('dealerHand').stand();
     }
   };
 
   AppView.prototype.initialize = function() {
+    this.model.on('playerWin', function() {
+      return alert('Player Wins!');
+    });
+    this.model.on('dealerWin', function() {
+      return alert('Dealer Wins!');
+    });
+    this.model.on('push', function() {
+      return alert('Push');
+    });
     return this.render();
   };
 

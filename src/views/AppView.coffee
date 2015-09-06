@@ -9,10 +9,14 @@ class window.AppView extends Backbone.View
     'click .hit-button': -> @model.get('playerHand').hit()
     #listens for DOM click event on the stand class button, calls stand on the player hand
     'click .stand-button': -> @model.get('playerHand').stand()
-    'click .stand-button': -> @model.get('dealerHand').stand()
+    #'click .stand-button': -> @model.get('dealerHand').stand()
     # 'click .stand-button': -> @model.get('game').get('dealerHand').flip()
     #'click .stand-button': -> @model.get('dealerHand').stand()
-  initialize: ->
+   initialize: ->
+
+    @model.on 'playerWin', -> alert 'Player Wins!'
+    @model.on 'dealerWin', -> alert 'Dealer Wins!'
+    @model.on 'push',      -> alert 'Push'
     @render()
     
 
